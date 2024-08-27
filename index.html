@@ -90,27 +90,21 @@
   flex-wrap: wrap-reverse;
 }
 
-.card__price--discount::before {
-  content: "Со скидкой";
-  font-weight: 400;
-  font-size: 13px;
-  color: #bfbfbf;
-}
 
 .card__price--common {
   font-weight: 400;
   font-size: 17px;
-  color: #606060;
+  color: #ff6633;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: flex-end;
 }
 
 .card__price--common::before {
-  content: "Обычная";
+  content: "цена:";
   font-weight: 400;
   font-size: 13px;
-  color: #bfbfbf;
+  color: #2bb454;
 }
 
 .card__title {
@@ -119,7 +113,7 @@
   font-weight: 400;
   font-size: 17px;
   line-height: 150%;
-  color: #414141;
+  color: #ff6633;
 }
 
 .card__title:hover {
@@ -128,6 +122,7 @@
 
 .card__add {
   display: block;
+  background-color: var(--tg-color-scheme);
   width: 100%;
   font-weight: 400;
   font-size: 17px;
