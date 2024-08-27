@@ -26,8 +26,7 @@ async def cmd_start(message: types.Message):
 @dp.message(lambda message: 'начать поиск 🔎' in message.text.lower())
 async def cmd_random(message: types.Message):
     await message.answer(text="что будем искать ❓")
-    obj = message.text
-    print(obj)
+    
     
     
  

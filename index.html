@@ -167,6 +167,21 @@
         </div>
     </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>    
+    <script> 
+      function getParameterByName(name, url) {
+      if (!url) url = window.location.href; 
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '=([^&#]*)'),
+          results = regex.exec(url);
+      return results == null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+      var word = getParameterByName('word');
+      if (word) {
+
+        document.getElementById('word').innerHTML = word;
+    }
+    </script>
 </body>
 
 </html>
