@@ -17,10 +17,19 @@
         }
 
         /* Стили для карточки товара */
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            /* Отступы между карточками */
+            padding: 10px;
+        }
+
         .card {
             border: 1px solid #000000;
             border-radius: 8px;
-            width: 300px;
+            width: 100%;
+            /* Карточка занимает всю ширину контейнера */
             padding: 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             background-color: var(--tg-color-scheme);
@@ -28,7 +37,6 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            /* Добавлено: для относительного позиционирования */
         }
 
         .card__content {
@@ -38,16 +46,13 @@
 
         .card__image img {
             max-width: 100px;
-            /* Уменьшенное изображение */
             margin-right: 20px;
-            /* Отступ между изображением и текстом */
             border-radius: 8px;
         }
 
         .card__bottom {
             flex-grow: 1;
             margin-bottom: 40px;
-            /* Добавлено: отступ снизу для поднятия текста */
         }
 
         .card__title {
@@ -80,7 +85,6 @@
         .card__add:hover {
             background-color: #0056b3;
         }
-
 
         .bar {
             width: 100%;
@@ -211,37 +215,69 @@
             <button class="pay">оплатить</button>
         </div>
     </div>
+    <div class="cards-container" id="cardsContainer">
+        <!-- Карточки будут добавлены сюда с помощью JavaScript -->
 
-    <div class="block2">
         <div class="block2">
-            <div class="card">
+
+        </div>
+
+
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <script>
+            const products = [
+                {
+                    image: 'https://avatars.mds.yandex.net/i?id=8ce667edc4a702dc07ab21479d499b23a5099f6a-9741114-images-thumbs&ref=rim&n=33&w=300&h=300',
+                    title: 'Смартфон Apple IPhone 14 Pro Max 256Gb, золотой',
+                    price: '150 000'
+                },
+                {
+                    image: 'https://avatars.mds.yandex.net/i?id=93250321017df6d8e83b0b45a625191c678bca81-4964301-images-thumbs&n=13',
+                    title: 'Смартфон Samsung Galaxy S21 Ultra 256Gb, черный',
+                    price: '120 000'
+                }
+                // Можно добавить больше объектов с данными о товарах
+            ];
+
+            function createCard(product) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
                 <div class="card__content">
                     <div class="card__top">
                         <a href="#" class="card__image">
-                            <img src="https://avatars.mds.yandex.net/i?id=8ce667edc4a702dc07ab21479d499b23a5099f6a-9741114-images-thumbs&ref=rim&n=33&w=300&h=300"
-                                alt="xsxsx">
+                            <img src="${product.image}" alt="${product.title}">
                         </a>
                     </div>
                     <div class="card__bottom">
-                        <!-- Цены на товар (с учетом скидки и без)-->
                         <div class="card__prices">
-                            <div class="card__price card__price--common">150 000</div>
+                            <div class="card__price card__price--common">${product.price}</div>
                         </div>
-                        <a href="#" class="card__title">
-                            Смартфон Apple IPhone 14 Pro Max 256Gb, золотой
-                        </a>
+                        <a href="#" class="card__title">${product.title}</a>
                     </div>
                 </div>
                 <button onclick="alert('работает')" class="card__add">подробнее</button>
-            </div>
-        </div>
-    </div>
+            `;
+                return card;
+            }
+
+            const container = document.getElementById('cardsContainer');
+
+            // Добавляем карточки в контейнер
+            products.forEach(product => {
+                const card = createCard(product);
+                container.appendChild(card);
+            });
+
+            // Если нужно добавить карточки динамически:
+            function addCard(product) {
+                const card = createCard(product);
+                container.appendChild(card);
+            }
+
+        </script>
 
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        let tg = window.Telegram.WebApp
-    </script>
 </body>
 
 </html>
