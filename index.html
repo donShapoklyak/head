@@ -12,35 +12,57 @@
             background-color: var(--tg-theme-bg-color);
         }
 
-        .block1 {
+        .block1,
+        .block2 {
             display: none;
+            /* Оба блока скрыты по умолчанию */
         }
 
-        /* Стили для карточки товара */
+        .active {
+            display: block;
+            /* Класс, который отображает блок */
+        }
+
+        .block2.active {
+            display: block;
+            /* Отображаем блок, когда он активен */
+            padding-top: 70px;
+            /* Отступ для заголовка */
+            box-sizing: border-box;
+            /* Учитываем padding в ширине и высоте блока */
+        }
+
         .cards-container {
             display: flex;
             flex-direction: column;
             gap: 16px;
-            /* Отступы между карточками */
             padding: 10px;
         }
 
         .bar2 {
-            width: 100%;
-            border: 1px solid #000000;
-            border-radius: 8px;
-            background: var(--tg-theme-bg-color);
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            .bar2 {
+                width: 100%;
+                border: 1px solid #000000;
+                border-radius: 8px;
+                background: var(--tg-theme-bg-color);
+                height: 70px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                /* Закрепляем заголовок сверху */
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                /* Поверх других элементов */
+            }
         }
 
         .card {
             border: 1px solid #000000;
             border-radius: 8px;
             width: 100%;
-            /* Карточка занимает всю ширину контейнера */
             padding: 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             background-color: var(--tg-color-scheme);
@@ -118,7 +140,6 @@
             border-radius: 10px;
             margin-top: 10%;
             gap: 1pc;
-            /* Отступы между элементами группы */
         }
 
         .btn_item {
@@ -126,9 +147,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            /* Контейнер занимает всю ширину родителя */
             max-width: 400px;
-            /* Можно задать максимальную ширину для ограничения */
         }
 
         .btn {
@@ -179,7 +198,7 @@
 </head>
 
 <body>
-    <div class="block1">
+    <div class="block1 active" id="block1">
         <div class="main">
             <header class="bar">
                 <h1 class="text_bar">давайте соберем ваш пк :)</h1>
@@ -189,31 +208,31 @@
         <div class="btn_group">
             <div class="btn_item">
                 <span class="btn_text">Процессор</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('processor')">+</button>
             </div>
             <div class="btn_item">
                 <span class="btn_text">Материнская плата</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('motherboard')">+</button>
             </div>
             <div class="btn_item">
                 <span class="btn_text">Оперативная память</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('ram')">+</button>
             </div>
             <div class="btn_item">
                 <span class="btn_text">Видеокарта</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('gpu')">+</button>
             </div>
             <div class="btn_item">
                 <span class="btn_text">SSD</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('ssd')">+</button>
             </div>
             <div class="btn_item">
                 <span class="btn_text">Блок питания</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('psu')">+</button>
             </div>
             <div class="btn_item">
                 <span class="btn_text">Корпус</span>
-                <button class="btn">+</button>
+                <button class="btn" onclick="showProducts('case')">+</button>
             </div>
         </div>
 
@@ -222,70 +241,96 @@
             <button class="pay">оплатить</button>
         </div>
     </div>
-    <div class="cards-container" id="cardsContainer">
-        <!-- Карточки будут добавлены сюда с помощью JavaScript -->
 
-        <div class="block2">
-            <header class="bar2"></header>
+    <div class="block2" id="block2">
+        <header class="bar2">
+
+        </header>
+        <div class="cards-container" id="cardsContainer">
 
         </div>
 
+    </div>
 
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-        <script>
-            const products = [
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        const productsData = {
+            processor: [
+                {
+                    image: 'https://example.com/processor1.jpg',
+                    title: 'Intel Core i9',
+                    price: 50000
+                },
+                {
+                    image: 'https://example.com/processor2.jpg',
+                    title: 'AMD Ryzen 9',
+                    price: '45000'
+                }
+            ],
+            motherboard: [
+                // данные для материнских плат
+            ],
+            ram: [
+                // данные для оперативной памяти
+            ],
+            gpu: [
                 {
                     image: 'https://avatars.mds.yandex.net/i?id=8ce667edc4a702dc07ab21479d499b23a5099f6a-9741114-images-thumbs&ref=rim&n=33&w=300&h=300',
-                    title: 'Смартфон Apple IPhone 14 Pro Max 256Gb, золотой',
-                    price: '150 000'
+                    title: 'Видеокарта NVIDIA RTX 3080',
+                    price: '120000'
                 },
                 {
                     image: 'https://avatars.mds.yandex.net/i?id=93250321017df6d8e83b0b45a625191c678bca81-4964301-images-thumbs&n=13',
-                    title: 'Смартфон Samsung Galaxy S21 Ultra 256Gb, черный',
-                    price: '120 000'
+                    title: 'Видеокарта AMD Radeon RX 6800',
+                    price: '90000'
                 }
-                // Можно добавить больше объектов с данными о товарах
-            ];
+            ],
+            ssd: [
+                // данные для SSD
+            ],
+            psu: [
+                // данные для блоков питания
+            ],
+            case: [
+                // данные для корпусов
+            ]
+        };
 
-            function createCard(product) {
+        function showProducts(category) {
+            const block1 = document.getElementById('block1');
+            const block2 = document.getElementById('block2');
+            const cardsContainer = document.getElementById('cardsContainer');
+
+            block1.classList.remove('active');
+            block2.classList.add('active');
+
+            cardsContainer.innerHTML = ''; // Очистка контейнера перед добавлением новых карточек
+
+            const products = productsData[category];
+
+            products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'card';
+
                 card.innerHTML = `
-                <div class="card__content">
-                    <div class="card__top">
-                        <a href="#" class="card__image">
-                            <img src="${product.image}" alt="${product.title}">
-                        </a>
-                    </div>
-                    <div class="card__bottom">
-                        <div class="card__prices">
-                            <div class="card__price card__price--common">${product.price}</div>
+                    <div class="card__content">
+                        <div class="card__image"><img src="${product.image}" alt="${product.title}"></div>
+                        <div class="card__bottom">
+                            <a href="#" class="card__title">${product.title}</a>
+                            <p class="card__price">${product.price} руб.</p>
                         </div>
-                        <a href="#" class="card__title">${product.title}</a>
                     </div>
-                </div>
-                <button onclick="alert('работает')" class="card__add">добавить</button>
-            `;
-                return card;
-            }
-
-            const container = document.getElementById('cardsContainer');
-
-            // Добавляем карточки в контейнер
-            products.forEach(product => {
-                const card = createCard(product);
-                container.appendChild(card);
+                    <button class="card__add">Добавить в корзину</button>
+                `;
+                cardsContainer.appendChild(card);
             });
+        }
 
-            // Если нужно добавить карточки динамически:
-            function addCard(product) {
-                const card = createCard(product);
-                container.appendChild(card);
-            }
-
-        </script>
-
-
+        function backToBlock1() {
+            document.getElementById('block1').classList.add('active');
+            document.getElementById('block2').classList.remove('active');
+        }
+    </script>
 </body>
 
 </html>
