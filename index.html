@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             background-color: var(--tg-theme-bg-color);
         }
+
         .bar {
             width: 100%;
             background: var(--tg-theme-button-color);
@@ -18,12 +20,14 @@
             align-items: center;
             justify-content: center;
         }
+
         .text_bar {
             text-align: center;
             font-family: monospace;
             color: var(--tg-theme-text-color);
             font-size: 1pc;
         }
+
         .btn_group {
             display: flex;
             flex-direction: column;
@@ -34,6 +38,7 @@
             margin-top: 10%;
             gap: 1pc; /* Отступы между элементами группы */
         }
+
         .btn_item {
             display: flex;
             align-items: center;
@@ -41,6 +46,7 @@
             width: 100%; /* Контейнер занимает всю ширину родителя */
             max-width: 400px; /* Можно задать максимальную ширину для ограничения */
         }
+
         .btn {
             width: 50px;
             height: 50px;
@@ -53,7 +59,24 @@
             color: var(--tg-theme-text-color);
             border: none;
         }
+
         .btn_text {
+            font-family: monospace;
+            color: var(--tg-theme-text-color);
+            font-size: 1pc;
+        }
+
+        .pay-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pay-label {
             font-family: monospace;
             color: var(--tg-theme-text-color);
             font-size: 1pc;
@@ -67,9 +90,6 @@
             color: var(--tg-theme-text-color);
             border-radius: 10%;
             border: none;
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
         }
     </style>
 </head>
@@ -107,17 +127,19 @@
             <button class="btn">+</button>
         </div>
         <div class="btn_item">
-          <span class="btn_text">Корпус</span>
-          <button class="btn">+</button>
-      </div>
+            <span class="btn_text">Корпус</span>
+            <button class="btn">+</button>
+        </div>
     </div>
 
-    <button class="pay">оплатить</button>
+    <div class="pay-container">
+        <span class="pay-label">к оплате:</span>
+        <button class="pay">оплатить</button>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>    
-    <script>
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </body>
 
 </html>
