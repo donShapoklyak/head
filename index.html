@@ -12,6 +12,40 @@
             background-color: var(--tg-theme-bg-color);
         }
 
+        input[type="range"] {
+            -webkit-appearance: none;
+            /* Отключаем стандартный стиль */
+            width: 60%;
+            /* Занимаем 60% ширины контейнера */
+            background-color: transparent;
+            /* Прозрачный фон */
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            background-color: var(--tg-theme-button-color);
+            /* Цвет трека */
+            border-radius: 5px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            background-color: var(--tg-theme-text-color);
+            /* Цвет ползунка */
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            margin-top: -6px;
+            /* Выровняем ползунок с треком */
+        }
+
+
+
+
+
         .block1,
         .block2 {
             display: none;
@@ -40,21 +74,21 @@
         }
 
         .bar2 {
-                width: 100%;
-                border: 1px solid var(--tg-theme-text-color);
-                border-radius: 8px;
-                background: var(--tg-theme-bg-color);
-                height: 70px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: fixed;
-                /* Закрепляем заголовок сверху */
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 10;
-                /* Поверх других элементов */
+            width: 100%;
+            border: 1px solid var(--tg-theme-text-color);
+            border-radius: 8px;
+            background: var(--tg-theme-bg-color);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            /* Закрепляем заголовок сверху */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            /* Поверх других элементов */
         }
 
         .card {
@@ -242,8 +276,9 @@
 
     <div class="block2" id="block2">
         <header class="bar2">
-            <input type="range" step="1" min="0" max="100" value="10" id="price" name="price"/>100
-             
+            <input type="range" step="1000" min="0" max="100000" value="100000" id="price" name="price"
+                oninput="filterProducts()" />
+            <span id="maxPriceLabel">100000 руб.</span>
         </header>
         <div class="cards-container" id="cardsContainer">
 
@@ -342,8 +377,10 @@
         };
 
         let totalPrice = 0;
+        let currentCategory = '';
 
         function showProducts(category) {
+            currentCategory = category;
             const block1 = document.getElementById('block1');
             const block2 = document.getElementById('block2');
             const cardsContainer = document.getElementById('cardsContainer');
@@ -354,27 +391,50 @@
             cardsContainer.innerHTML = '';
 
             productsData[category].forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="card__content">
-                        <div class="card__image">
-                            <img src="${product.image}" alt="${product.title}">
-                        </div>
-                        <div class="card__bottom">
-                            <h2 class="card__title">${product.title}</h2>
-                            <p class="card__price">${product.price} руб.</p>
-                        </div>
-                        <button class="card__add">Добавить в корзину</button>
-                    </div>
-                `;
-                card.querySelector('.card__add').addEventListener('click', function () {
-                    updateBlock1(category, product.title, product.price);
-                    toggleBlock();
-                });
+                const card = createCard(product, category);
                 cardsContainer.appendChild(card);
             });
         }
+
+        function createCard(product, category) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card__content">
+                    <div class="card__image">
+                        <img src="${product.image}" alt="${product.title}">
+                    </div>
+                    <div class="card__bottom">
+                        <h2 class="card__title">${product.title}</h2>
+                        <p class="card__price">${product.price} руб.</p>
+                    </div>
+                    <button class="card__add">Добавить в корзину</button>
+                </div>
+            `;
+            card.querySelector('.card__add').addEventListener('click', function () {
+                updateBlock1(category, product.title, product.price);
+                toggleBlock();
+            });
+            return card;
+        }
+
+        function filterProductsByPrice(maxPrice) {
+            const cardsContainer = document.getElementById('cardsContainer');
+            cardsContainer.innerHTML = '';
+
+            productsData[currentCategory].forEach(product => {
+                if (product.price <= maxPrice) {
+                    const card = createCard(product, currentCategory);
+                    cardsContainer.appendChild(card);
+                }
+            });
+        }
+
+        document.getElementById('price').addEventListener('input', function (event) {
+            const maxPrice = event.target.value;
+            document.getElementById('maxPriceLabel').textContent = maxPrice + ' руб.';
+            filterProductsByPrice(maxPrice);
+        });
 
         function toggleBlock() {
             const block1 = document.getElementById('block1');
@@ -395,7 +455,6 @@
                 resetBlock1(category, productPrice);
             };
 
-            // Добавляем цену товара к общей сумме
             totalPrice += productPrice;
             document.getElementById('totalPrice').textContent = totalPrice;
         }
@@ -421,7 +480,6 @@
                 showProducts(category);
             };
 
-            // Уменьшаем цену товара из общей суммы
             totalPrice -= productPrice;
             document.getElementById('totalPrice').textContent = totalPrice;
         }
