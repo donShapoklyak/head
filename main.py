@@ -3,7 +3,7 @@ import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from aiogram.types.web_app_info import WebAppInfo
-from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup
+from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup, InlineKeyboardBuilder
 global obj
 global city
 
@@ -19,13 +19,18 @@ async def cmd_start(message: types.Message):
     user = message.from_user
     username = user.first_name
     markup = ReplyKeyboardBuilder()
-    markup.add(types.KeyboardButton(text="начать поиск 🔎"))
+    markup.add(types.KeyboardButton(text="да!", width=1))
     markup = markup.as_markup() 
-    await message.answer(text=f"привет! {username} начнем?", reply_markup=markup)
+    await message.answer(text=f"привет! {username} хотите оформить заказ?", reply_markup=markup)
  
-@dp.message(lambda message: 'начать поиск 🔎' in message.text.lower())
+@dp.message(lambda message: 'да!' in message.text.lower())
 async def cmd_random(message: types.Message):
-    await message.answer(text="что будем искать ❓")
+    webAppInfo = types.WebAppInfo(url="https://donshapoklyak.github.io/head/")
+    builder = InlineKeyboardBuilder()
+    builder.add(types.InlineKeyboardButton(text='собрать пк', web_app=webAppInfo))
+    
+    await message.answer(text="отлично предлагаю воспользоваться нашим конструктором для сборки пк", reply_markup=builder.as_markup())
+    await message.answer("........", reply_markup=types.ReplyKeyboardRemove())
     
     
     
