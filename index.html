@@ -163,69 +163,52 @@
             font-size: 1pc;
         }
 
-        .btn_group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            border: 2px solid var(--tg-theme-button-color);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 10%;
-            gap: 1pc;
-        }
+        @media (max-width: 768px) {
+            .btn_group {
+                margin-top: 20%;
+            }
 
-        .btn_item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 400px;
-        }
+            .btn_item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-        .btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--tg-theme-button-color);
-            color: var(--tg-theme-text-color);
-            border: none;
-        }
+            .btn {
+                width: 60px;
+                height: 60px;
+            }
 
-        .btn_text {
-            font-family: monospace;
-            color: var(--tg-theme-text-color);
-            font-size: 1pc;
-        }
+            .btn_text {
+                font-family: monospace;
+                color: var(--tg-theme-text-color);
+                font-size: 1pc;
+            }
 
-        .pay-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+            .pay-container {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
 
-        .pay-label {
-            font-family: monospace;
-            color: var(--tg-theme-text-color);
-            font-size: 1pc;
-        }
+            .pay-label {
+                font-family: monospace;
+                color: var(--tg-theme-text-color);
+                font-size: 1pc;
+            }
 
-        .pay {
-            width: 100px;
-            height: 50px;
-            font-size: 15px;
-            background-color: var(--tg-theme-button-color);
-            color: var(--tg-theme-text-color);
-            border-radius: 10%;
-            border: none;
-        }
+            .pay {
+                width: 100px;
+                height: 50px;
+                font-size: 15px;
+                background-color: var(--tg-theme-button-color);
+                color: var(--tg-theme-text-color);
+                border-radius: 10%;
+                border: none;
+            }
     </style>
 </head>
 
