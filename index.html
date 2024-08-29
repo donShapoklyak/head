@@ -46,10 +46,6 @@
             color: var(--tg-theme-text-color);
         }
 
-
-
-
-
         .block1,
         .block2 {
             display: none;
@@ -282,7 +278,7 @@
         <header class="bar2">
             <input type="range" step="1000" min="0" max="100000" value="100000" id="price" name="price"
                 oninput="filterProducts()" />
-            <span class="textrange"  id="maxPriceLabel">100000 руб.</span>
+            <span class="textrange" id="maxPriceLabel">100000 руб.</span>
         </header>
         <div class="cards-container" id="cardsContainer">
 
@@ -296,86 +292,189 @@
         const productsData = {
             processor: [
                 {
-                    image: 'https://example.com/processor1.jpg',
-                    title: 'Intel Core i9',
-                    price: 50000
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/9e8fda982fd20d945efc83694a7308d0/07e6e156d63b4ad73552b7c15c9fa53d5a92783895fbb02f2c531b6751845879.jpg.webp',
+                    title: 'Процессор Intel Celeron G5905 OEM',
+                    price: 5000
                 },
                 {
-                    image: 'https://example.com/processor2.jpg',
-                    title: 'AMD Ryzen 9',
-                    price: 45000
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/f446063370ca0278ce84f0cf6720d8ed/116e73208fbbee3ace33505f672d014208671cbdb699271f28ce2c0eeeb9857a.jpg.webp',
+                    title: 'Процессор Intel Core i3-10105F OEM',
+                    price: 6000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/c67d4a0bcfaa2736f00deb19581d8369/e8b47ad29343f808b5d381a74805eade1252596666618bc262e49aab43d24861.jpg.webp',
+                    title: 'Процессор Intel Core i5-11600K OEM',
+                    price: 13500
+                }
+                ,
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/c67d4a0bcfaa2736f00deb19581d8369/e8b47ad29343f808b5d381a74805eade1252596666618bc262e49aab43d24861.jpg.webp',
+                    title: 'Процессор Intel Core i5-12600K OEM',
+                    price: 15500
+                }
+                ,
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/b5ac9beeb48dd35aa2f73182f5fff618/73c765870b6dbf4d46fe7a91dde427c978004fd778d7ebd5f927b7f7b9db71a2.jpg.webp',
+                    title: 'Процессор Intel Core i7-11700F BOX',
+                    price: 19566
+                }
+                ,
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/0e3bdf5ca0fb9e3526077a5b17841113/58d92d84c46caaa7631e037da06f9f812ddb964a6322b8b7de59b4c61e13d755.jpg.webp',
+                    title: 'Процессор Intel Core i9-11900K OEM',
+                    price: 30555
                 }
             ],
             motherboard: [
                 {
-                    image: 'https://example.com/motherboard1.jpg',
-                    title: 'ASUS ROG Strix',
-                    price: 20000
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/39b4ac31547715110bdbf11aa821a84c/a7ae420b34c40d2b67baa2e32c9ad54f201da9c10e074c772537e97acfdaac56.jpg.webp',
+                    title: 'Материнская плата MSI PRO H510M-B',
+                    price: 5750
                 },
                 {
-                    image: 'https://example.com/motherboard2.jpg',
-                    title: 'MSI MPG X570',
-                    price: 18000
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/eab4feaf2a921f2f36b13c48d02103ad/fe6b5e7bd55fb942798c60ef6bf10e519ec198830319b1027bf64585938cb0b4.jpg.webp',
+                    title: 'Материнская плата ASRock H510M-HDV/M.2 SE',
+                    price: 10000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/9a2af5a87d4620d991c29c886e0e7f57/91755ae8e3046f60405f6d91a1c486b54b9f78c72ecf252d9ef03dafca6f1248.jpg.webp',
+                    title: 'Материнская плата ASRock B560M Pro4',
+                    price: 15000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/49e8ac6b180191592c333787d90f1cab/8868a71da65680e852617eb1691189fb8770336b0fdeb27d3ebb94e4c4c488f0.png.webp',
+                    title: 'Материнская плата GIGABYTE Z590 AORUS XTREME WATERFORCE',
+                    price: 90000
                 }
             ],
             ram: [
                 {
-                    image: 'https://example.com/ram1.jpg',
-                    title: 'Corsair Vengeance 16GB',
-                    price: 7000
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/bf09a6f869afde749051e5afadebca7a/f562d5d7c5aded9062b33c2f7f46ca625e7391fc96aeda3e27f56955a0906641.jpg.webp',
+                    title: 'Оперативная память Kingston FURY Beast Black [KF432C16BBK2/16] 16 ГБ',
+                    price: 5000
                 },
                 {
-                    image: 'https://example.com/ram2.jpg',
-                    title: 'G.Skill Trident Z 32GB',
-                    price: 14000
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/1d8c50d7fce4569b4d8f1a6e797af1c9/ec9aa11949d9927cc1680a8a698e3259dd0af7fe8eef892ed6a347489333e186.jpg.webp',
+                    title: 'Оперативная память G.Skill AEGIS [F4-3200C16D-32GIS] 32 ГБ',
+                    price: 10000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/5f32d4473ad73fed8d896031d56d4d2f/187c700d6066d0de448b5a34886abea16d332a2e770e8cdd1636f44348f9d4a0.jpg.webp',
+                    title: 'Оперативная память Kingston FURY Beast Black [KF432C16BBK2/64] 64 ГБ',
+                    price: 20000
                 }
             ],
             gpu: [
                 {
-                    image: 'https://example.com/gpu1.jpg',
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/8ec3d764709388fb8521abfcdfa65410/291e3d866c55a4a55843d59380a9a2fe063f05290e8df4b95efb35ddf6b12e0b.jpg.webp',
+                    title: 'Видеокарта MSI GeForce GTX 1650 D6 VENTUS XS OCV3 [GeForce GTX 1650 D6 VENTUS XS OCV3]',
+                    price: 15000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/d26d002113171f9313f768314d36af7a/e19ad47a5d61e1ad9ad38ed88707c481d5ab730d0e21fd4cd2d1d4cb36bf29d8.jpg.webp',
+                    title: 'Видеокарта KFA2 GeForce RTX 4060 CORE Black [46NSL8MD9NXK]',
+                    price: 32599
+                },
+                {
+                    image: 'Видеокарта GIGABYTE GeForce RTX 4070 SUPER GAMING OC [GV-N407SGAMING OC-12GD]',
                     title: 'NVIDIA RTX 3080',
                     price: 90000
                 },
                 {
-                    image: 'https://example.com/gpu2.jpg',
-                    title: 'AMD Radeon RX 6800',
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/4bccef7226bf942ca7f596ec825a13c6/7317cdaba2b482b1fb33e4dee0f5ad139b7a2299eb53700f015149367f54b0d9.jpg.webp',
+                    title: 'Видеокарта GIGABYTE GeForce RTX 4070 SUPER GAMING OC [GV-N407SGAMING OC-12GD]',
                     price: 80000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/6fa554365bbf0bd5a287db15069cd9a2/99b53654f4cb5b5bf79de75761cf2cac4edd6ac0f03bf58aab338b94e3f549be.jpg.webp',
+                    title: 'Видеокарта Sapphire AMD Radeon RX 7800 XT PURE OC [11330-03]',
+                    price: 60564
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/e9ea0f7e299f303e82e08199607a0c7a/e8ddc0e4c433dbc8bac1ff8eace93ca4f32aa5f7595afbd515c83e803e22c544.jpg.webp',
+                    title: 'Видеокарта PowerColor AMD Radeon RX 6600 Fighter [AXRX 6600 8GBD6-3DH]',
+                    price: 25050
                 }
             ],
             ssd: [
                 {
-                    image: 'https://example.com/ssd1.jpg',
-                    title: 'Samsung 970 Evo 1TB',
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/58566c00b29d23d63ecf7b06f1afbcd9/2a8dc611d1748befbe216861600a5a3432e0d69b63ab5f43c203573041d59394.jpg.webp',
+                    title: '1000 ГБ 2.5" SATA накопитель Samsung 870 EVO',
                     price: 12000
                 },
                 {
-                    image: 'https://example.com/ssd2.jpg',
-                    title: 'Kingston A2000 500GB',
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/3f26870a871efc85d674bfee24a2d489/76c25a9dfe9a7c148e880634d7dd3ed6dea355f0aeba191f3774e1cbcb12132e.jpg.webp',
+                    title: '1024 ГБ 2.5" SATA накопитель DEXP C100 [C100SMYM1024]',
                     price: 6000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/58566c00b29d23d63ecf7b06f1afbcd9/2a8dc611d1748befbe216861600a5a3432e0d69b63ab5f43c203573041d59394.jpg.webp',
+                    title: '2000 ГБ 2.5" SATA накопитель Samsung 870 EVO',
+                    price: 18000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/9ebab6732c13940e448cc0a898c8be3f/5e87a793f23a063e32c4d926ba7a8fca6f40b13293232ebc250e74dc4aba935c.png.webp',
+                    title: '4000 ГБ 2.5" SATA накопитель WD Blue SA510 [WDS400T3B0A]',
+                    price: 39555
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/a173821dcb049b7920ce4788543f297c/106db3dcffb615a06604dfce2db5cce216781bf44f1287dba5a76bff270c496f.jpg.webp',
+                    title: '8000 ГБ 2.5" SATA накопитель Team Group EX2 [T253E2008T0C101]',
+                    price: 80399
                 }
             ],
             psu: [
                 {
-                    image: 'https://example.com/psu1.jpg',
-                    title: 'Corsair RM850x',
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/014ddd2895f8d06d98b1482cfa71d17e/74c7a89208c221e785c0d1da83dbbf565f4636c187bce0b6c803074a329228be.jpg.webp',
+                    title: 'Блок питания DEEPCOOL PF750 [R-PF750D-HA0B-EU] черный',
+                    price: 5000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/da2b3f9e8e728fcd1ca30180d84f4dde/b5ac31867a4d4b6f5f3ac0b9b9e6f20d53b1e791fa5de34ee22b4003b27c6d86.jpg.webp',
+                    title: 'Блок питания DEEPCOOL DQ750 [DQ750-M-V2L] черный',
                     price: 10000
                 },
                 {
-                    image: 'https://example.com/psu2.jpg',
-                    title: 'EVGA Supernova 750W',
-                    price: 8000
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/812102b1db546e49004e479091fa5a53/f07fdfd607acf9599a4d8424ece556dabb883c7dddcfb22a397ee99f7d3a5937.jpg.webp',
+                    title: 'Блок питания DeepCool PX1000G черный',
+                    price: 17500
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/bb6933cf086177701b3e75019fd7ac26/6ce7b242b8c4e139bc502098239d09aeb94ea71239335c286dc25bdf31277400.jpg.webp',
+                    title: 'Блок питания MSI MEG Ai1300P PCIE5 [306-7ZP4A11-CE0] черный',
+                    price: 35000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/1a548194f30a857e5e7ca7cad103d2ee/063e26df344df4fd7a7ae90093a333551dc2d5bd4fffe17467814b5328bb01c6.jpg.webp',
+                    title: 'Блок питания DEEPCOOL PX1300P [R-PXD00P-FC0B-EU] черный',
+                    price: 24500
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/a37baf1ca2f64e1c54cd598c31cdadaf/c5bc3fe28574be8f1230c09d77c88d817c44ca3c684dd9cbb671e0ef3bdcc186.jpg.webp',
+                    title: 'Блок питания Chieftec PowerPlay 1050W [GPU-1050FC-FOB] красный, черный',
+                    price: 15799
                 }
             ],
             case: [
                 {
-                    image: 'https://example.com/case1.jpg',
-                    title: 'NZXT H510',
-                    price: 5000
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/d520b3aae4241edf54958eb826a638d0/cfd49a0538d79124ecd9eefc851013e7c6fe6433e5fbebd7494d0fb55b0a8738.jpg.webp',
+                    title: 'Корпус Cougar Duoface Pro RGB [CGR-5AD1B-RGB ] черный',
+                    price: 8000
                 },
                 {
-                    image: 'https://example.com/case2.jpg',
-                    title: 'Cooler Master MasterBox Q300L',
-                    price: 4000
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/0ba578307b44783860b1deda12a19541/f30b06c5b5c47f7f348af003bacfb9a9bcff511498794850a889cdd73479550a.jpg.webp',
+                    title: 'Корпус Cougar MX600 RGB [3857C90.0017] черный',
+                    price: 10000
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st1/fit/300/300/c8a4e4b140441c0855d4648039fc843f/41ce8b5d8f474dc2f3e623636af78d44a228cd1bd189cae7ae1fc2d31eec7e3f.jpg.webp',
+                    title: 'Корпус Montech KING 95 PRO черный',
+                    price: 17399
+                },
+                {
+                    image: 'https://c.dns-shop.ru/thumb/st4/fit/300/300/ba23da25094b3ddd2c0b1d9ba6f3a6ca/77e82b886892d50fba756673a798101f18bc8295ca43688702bcfc1015b967e0.jpg.webp',
+                    title: 'Корпус Corsair Crystal Series 680X RGB [CC-9011168-WW] черный',
+                    price: 27000
                 }
             ]
         };
