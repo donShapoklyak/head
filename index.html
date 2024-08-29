@@ -588,11 +588,11 @@
 
             totalPrice -= productPrice;
             document.getElementById('totalPrice').textContent = totalPrice;
-            window.Telegram.WebApp.ready();
+            let tg = window.Telegram.WebApp
 
             document.getElementById('pays').addEventListener('click', function () {
              
-                window.Telegram.WebApp.close();
+                tg.close();
             });
         }
     </script>
