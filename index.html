@@ -42,6 +42,10 @@
             /* Выровняем ползунок с треком */
         }
 
+        .textrange {
+            color: var(--tg-theme-text-color);
+        }
+
 
 
 
@@ -278,7 +282,7 @@
         <header class="bar2">
             <input type="range" step="1000" min="0" max="100000" value="100000" id="price" name="price"
                 oninput="filterProducts()" />
-            <span id="maxPriceLabel">100000 руб.</span>
+            <span class="textrange"  id="maxPriceLabel">100000 руб.</span>
         </header>
         <div class="cards-container" id="cardsContainer">
 
