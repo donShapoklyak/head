@@ -206,39 +206,39 @@
         </div>
 
         <div class="btn_group">
-            <div class="btn_item">
+            <div class="btn_item" data-category="processor">
                 <span class="btn_text">Процессор</span>
                 <button class="btn" onclick="showProducts('processor')">+</button>
             </div>
-            <div class="btn_item">
+            <div class="btn_item" data-category="motherboard">
                 <span class="btn_text">Материнская плата</span>
                 <button class="btn" onclick="showProducts('motherboard')">+</button>
             </div>
-            <div class="btn_item">
+            <div class="btn_item" data-category="ram">
                 <span class="btn_text">Оперативная память</span>
                 <button class="btn" onclick="showProducts('ram')">+</button>
             </div>
-            <div class="btn_item">
+            <div class="btn_item" data-category="gpu">
                 <span class="btn_text">Видеокарта</span>
                 <button class="btn" onclick="showProducts('gpu')">+</button>
             </div>
-            <div class="btn_item">
+            <div class="btn_item" data-category="ssd">
                 <span class="btn_text">SSD</span>
                 <button class="btn" onclick="showProducts('ssd')">+</button>
             </div>
-            <div class="btn_item">
+            <div class="btn_item" data-category="psu">
                 <span class="btn_text">Блок питания</span>
                 <button class="btn" onclick="showProducts('psu')">+</button>
             </div>
-            <div class="btn_item">
+            <div class="btn_item" data-category="case">
                 <span class="btn_text">Корпус</span>
                 <button class="btn" onclick="showProducts('case')">+</button>
             </div>
         </div>
 
         <div class="pay-container">
-            <span class="pay-label">к оплате:</span>
-            <button class="pay">оплатить</button>
+            <span class="pay-label">К оплате: <span id="totalPrice">0</span> руб.</span>
+            <button class="pay">Оплатить</button>
         </div>
     </div>
 
@@ -253,6 +253,7 @@
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         const productsData = {
             processor: [
@@ -264,37 +265,84 @@
                 {
                     image: 'https://example.com/processor2.jpg',
                     title: 'AMD Ryzen 9',
-                    price: '45000'
+                    price: 45000
                 }
             ],
             motherboard: [
-                // данные для материнских плат
+                {
+                    image: 'https://example.com/motherboard1.jpg',
+                    title: 'ASUS ROG Strix',
+                    price: 20000
+                },
+                {
+                    image: 'https://example.com/motherboard2.jpg',
+                    title: 'MSI MPG X570',
+                    price: 18000
+                }
             ],
             ram: [
-                // данные для оперативной памяти
+                {
+                    image: 'https://example.com/ram1.jpg',
+                    title: 'Corsair Vengeance 16GB',
+                    price: 7000
+                },
+                {
+                    image: 'https://example.com/ram2.jpg',
+                    title: 'G.Skill Trident Z 32GB',
+                    price: 14000
+                }
             ],
             gpu: [
                 {
-                    image: 'https://avatars.mds.yandex.net/i?id=8ce667edc4a702dc07ab21479d499b23a5099f6a-9741114-images-thumbs&ref=rim&n=33&w=300&h=300',
-                    title: 'Видеокарта NVIDIA RTX 3080',
-                    price: '120000'
+                    image: 'https://example.com/gpu1.jpg',
+                    title: 'NVIDIA RTX 3080',
+                    price: 90000
                 },
                 {
-                    image: 'https://avatars.mds.yandex.net/i?id=93250321017df6d8e83b0b45a625191c678bca81-4964301-images-thumbs&n=13',
-                    title: 'Видеокарта AMD Radeon RX 6800',
-                    price: '90000'
+                    image: 'https://example.com/gpu2.jpg',
+                    title: 'AMD Radeon RX 6800',
+                    price: 80000
                 }
             ],
             ssd: [
-                // данные для SSD
+                {
+                    image: 'https://example.com/ssd1.jpg',
+                    title: 'Samsung 970 Evo 1TB',
+                    price: 12000
+                },
+                {
+                    image: 'https://example.com/ssd2.jpg',
+                    title: 'Kingston A2000 500GB',
+                    price: 6000
+                }
             ],
             psu: [
-                // данные для блоков питания
+                {
+                    image: 'https://example.com/psu1.jpg',
+                    title: 'Corsair RM850x',
+                    price: 10000
+                },
+                {
+                    image: 'https://example.com/psu2.jpg',
+                    title: 'EVGA Supernova 750W',
+                    price: 8000
+                }
             ],
             case: [
-                // данные для корпусов
+                {
+                    image: 'https://example.com/case1.jpg',
+                    title: 'NZXT H510',
+                    price: 5000
+                },
+                {
+                    image: 'https://example.com/case2.jpg',
+                    title: 'Cooler Master MasterBox Q300L',
+                    price: 4000
+                }
             ]
         };
+
+        let totalPrice = 0;
 
         function showProducts(category) {
             const block1 = document.getElementById('block1');
@@ -304,31 +352,79 @@
             block1.classList.remove('active');
             block2.classList.add('active');
 
-            cardsContainer.innerHTML = ''; // Очистка контейнера перед добавлением новых карточек
+            cardsContainer.innerHTML = '';
 
-            const products = productsData[category];
-
-            products.forEach(product => {
+            productsData[category].forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'card';
-
                 card.innerHTML = `
                     <div class="card__content">
-                        <div class="card__image"><img src="${product.image}" alt="${product.title}"></div>
+                        <div class="card__image">
+                            <img src="${product.image}" alt="${product.title}">
+                        </div>
                         <div class="card__bottom">
-                            <a href="#" class="card__title">${product.title}</a>
+                            <h2 class="card__title">${product.title}</h2>
                             <p class="card__price">${product.price} руб.</p>
                         </div>
+                        <button class="card__add">Добавить в корзину</button>
                     </div>
-                    <button class="card__add">Добавить в корзину</button>
                 `;
+                card.querySelector('.card__add').addEventListener('click', function () {
+                    updateBlock1(category, product.title, product.price);
+                    toggleBlock();
+                });
                 cardsContainer.appendChild(card);
             });
         }
 
-        function backToBlock1() {
-            document.getElementById('block1').classList.add('active');
-            document.getElementById('block2').classList.remove('active');
+        function toggleBlock() {
+            const block1 = document.getElementById('block1');
+            const block2 = document.getElementById('block2');
+
+            block1.classList.toggle('active');
+            block2.classList.toggle('active');
+        }
+
+        function updateBlock1(category, productName, productPrice) {
+            const btnItem = document.querySelector(`.btn_item[data-category="${category}"]`);
+            const btnText = btnItem.querySelector('.btn_text');
+            const btn = btnItem.querySelector('.btn');
+
+            btnText.textContent = productName;
+            btn.textContent = '-';
+            btn.onclick = function () {
+                resetBlock1(category, productPrice);
+            };
+
+            // Добавляем цену товара к общей сумме
+            totalPrice += productPrice;
+            document.getElementById('totalPrice').textContent = totalPrice;
+        }
+
+        function resetBlock1(category, productPrice) {
+            const btnItem = document.querySelector(`.btn_item[data-category="${category}"]`);
+            const btnText = btnItem.querySelector('.btn_text');
+            const btn = btnItem.querySelector('.btn');
+
+            const defaultText = {
+                processor: 'Процессор',
+                motherboard: 'Материнская плата',
+                ram: 'Оперативная память',
+                gpu: 'Видеокарта',
+                ssd: 'SSD',
+                psu: 'Блок питания',
+                case: 'Корпус'
+            };
+
+            btnText.textContent = defaultText[category];
+            btn.textContent = '+';
+            btn.onclick = function () {
+                showProducts(category);
+            };
+
+            // Уменьшаем цену товара из общей суммы
+            totalPrice -= productPrice;
+            document.getElementById('totalPrice').textContent = totalPrice;
         }
     </script>
 </body>
