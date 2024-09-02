@@ -291,7 +291,9 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        let tg = window.Telegram.WebApp
 
+        tg.close();
         src="https://telegram.org/js/telegram-web-app.js"
 
         const productsData = {
@@ -590,11 +592,10 @@
 
             totalPrice -= productPrice;
             document.getElementById('totalPrice').textContent = totalPrice;
-            let tg = window.Telegram.WebApp
-
+            
             document.getElementById('pays').addEventListener('click', function () {
              
-                //tg.close();
+                
             });
         }
     </script>
