@@ -294,7 +294,8 @@
         let tg = window.Telegram.WebApp
 
         document.getElementById('pays').addEventListener('click', function () {  
-                tg.close();
+
+                tg.close(JSON.stringify(totalPrice));
             });
 
         
