@@ -4,6 +4,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from aiogram.types.web_app_info import WebAppInfo
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup, InlineKeyboardBuilder
+from aiogram import F
 global obj
 global city
 
@@ -31,7 +32,9 @@ async def cmd_random(message: types.Message):
     
     await message.answer(text="отлично предлагаю воспользоваться нашим конструктором для сборки пк", reply_markup=builder.as_markup())
     
-    
+@dp.message(F.content_type(web_app_data=True))
+async def handle_web_app_data(message: types.Message):
+    await message.answer(message.web_app_data.data)
     
     
  

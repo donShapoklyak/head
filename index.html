@@ -293,9 +293,10 @@
     <script>
         let tg = window.Telegram.WebApp
 
-        document.getElementById('pays').addEventListener('click', function () {  
+        document.getElementById('pays').addEventListener('click', function () { 
+                tg.sendData(JSON.stringify("hello"));
 
-                tg.close(JSON.stringify("hello"));
+                tg.close();
             });
 
         
