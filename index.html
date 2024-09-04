@@ -294,7 +294,7 @@
         let tg = window.Telegram.WebApp
 
         document.getElementById('pays').addEventListener('click', function () { 
-                tg.sendData(JSON.stringify("hello"));
+                tg.sendData(JSON.stringify({ data: "hello" }));
 
                 tg.close();
             });

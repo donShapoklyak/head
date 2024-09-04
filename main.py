@@ -34,7 +34,7 @@ async def cmd_random(message: types.Message):
     
 @dp.message(F.content_type(web_app_data=True))
 async def handle_web_app_data(message: types.Message):
-    await message.answer(message.web_app_data.data)
+    await message.answer(f"Received data: {message.web_app_data.data['data']}")
     
     
  
