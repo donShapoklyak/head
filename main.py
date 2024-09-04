@@ -26,11 +26,11 @@ async def cmd_start(message: types.Message):
 @dp.message(lambda message: 'да!' in message.text.lower())
 async def cmd_random(message: types.Message):
     webAppInfo = types.WebAppInfo(url="https://donshapoklyak.github.io/head/")
-    builder = InlineKeyboardBuilder()
-    builder.add(types.InlineKeyboardButton(text='собрать пк', web_app=webAppInfo))
+    builder = ReplyKeyboardBuilder()
+    builder.add(types.KeyboardButton(text='собрать пк', web_app=webAppInfo))
     
     await message.answer(text="отлично предлагаю воспользоваться нашим конструктором для сборки пк", reply_markup=builder.as_markup())
-    await message.answer("........", reply_markup=types.ReplyKeyboardRemove())
+    
     
     
     
