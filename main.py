@@ -5,6 +5,7 @@ from aiogram.filters.command import Command
 from aiogram.types.web_app_info import WebAppInfo
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup, InlineKeyboardBuilder
 from aiogram import F
+import requests
 global obj
 global city
 
@@ -31,13 +32,13 @@ async def cmd_random(message: types.Message):
     builder.add(types.KeyboardButton(text='собрать пк', web_app=webAppInfo))
     
     await message.answer(text="отлично предлагаю воспользоваться нашим конструктором для сборки пк", reply_markup=builder.as_markup())
-    
-@dp.message(F.content_type(web_app_data=True))
-async def handle_web_app_data(message: types.Message):
-    await message.answer(f"Received data: {message.web_app_data.data['data']}")
-    
-    
- 
+def get_data_from_web_app():
+    response = requests.get('https://example.com/api/endpoint')
+    data = response.json()
+    return data
+@dp.message(~F.message.via_bot) 
+async def web_app2(message: types.Message): 
+    print(message.web_app_data) await message.answer("test")
 
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
