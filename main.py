@@ -37,14 +37,13 @@ def get_data_from_web_app():
     response = requests.get('https://example.com/api/endpoint')
     data = response.json()
     return data
-@dp.message() 
-async def web_app2(message: types.Message): 
+@dp.message()
+async def web_app2(message: types.Message):
     if message.web_app_data:
         try:
-            # Парсим JSON данные
-            data = json.loads(message.web_app_data)
-            print(data)  # Печатаем полученные данные
-            await message.answer(f"Получено: {data['data']}")
+            data = json.loads(str(message.web_app_data))
+            print(data)  # Печать полученных данных
+            await message.answer(f"Получено: {data['niga']}")
         except json.JSONDecodeError:
             await message.answer("Не удалось декодировать данные веб-приложения")
     else:
