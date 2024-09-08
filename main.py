@@ -38,7 +38,8 @@ def get_data_from_web_app():
     return data
 @dp.message(~F.message.via_bot) 
 async def web_app2(message: types.Message): 
-    print(message.web_app_data) await message.answer("test")
+    print(message.web_app_data) 
+    await message.answer("test")
 
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
@@ -46,6 +47,7 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main()) 
+
 
 
 
