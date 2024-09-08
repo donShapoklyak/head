@@ -42,10 +42,18 @@ async def web_app2(message: types.Message):
     if message.web_app_data:
         try:
             data = json.loads(str(message.web_app_data))
-            print(data)  # Печать полученных данных
-            await message.answer(f"Получено: {data['niga']}")
+            print(f"Получено от пользователя: {data['niga']}")
+
+            # Отправляем сообщение боту с данными
+            await bot.send_message(chat_id=message.chat.id, text=f"Получено от пользователя: {data['niga']}")
+
+            # Отправляем ответ пользователю
+            await message.answer(f"Ваш ответ: {data['niga']}")
         except json.JSONDecodeError:
             await message.answer("Не удалось декодировать данные веб-приложения")
+    elif message.text.startswith("Получено от пользователя:"):
+        # Обрабатываем сообщения, отправляемые ботом
+        print(f"Получено от бота: {message.text.split(': ')[1]}")
     else:
         await message.answer("Данные веб-приложения не получены")
     

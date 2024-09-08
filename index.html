@@ -294,7 +294,7 @@
         let tg = window.Telegram.WebApp
         let niga = 5
         document.getElementById('pays').addEventListener('click', function () { 
-                tg.sendData(JSON.stringify(niga));
+                tg.sendData(JSON.stringify({ 'niga': niga }));
 
                 tg.close();
             });
