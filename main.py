@@ -6,6 +6,7 @@ from aiogram.types.web_app_info import WebAppInfo
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup, InlineKeyboardBuilder
 from aiogram import F
 import requests
+import json
 global obj
 global city
 
@@ -25,7 +26,7 @@ async def cmd_start(message: types.Message):
     markup = markup.as_markup() 
     await message.answer(text=f"привет! {username} хотите оформить заказ?", reply_markup=markup)
  
-@dp.message(lambda message: 'да!' in message.text.lower())
+@dp.message(lambda message: message.text and 'да!' in message.text.lower())
 async def cmd_random(message: types.Message):
     webAppInfo = types.WebAppInfo(url="https://donshapoklyak.github.io/head/")
     builder = ReplyKeyboardBuilder()
@@ -36,10 +37,19 @@ def get_data_from_web_app():
     response = requests.get('https://example.com/api/endpoint')
     data = response.json()
     return data
-@dp.message(~F.message.via_bot) 
+@dp.message() 
 async def web_app2(message: types.Message): 
-    print(message.web_app_data) 
-    await message.answer("test")
+    if message.web_app_data:
+        try:
+            # Парсим JSON данные
+            data = json.loads(message.web_app_data)
+            print(data)  # Печатаем полученные данные
+            await message.answer(f"Получено: {data['data']}")
+        except json.JSONDecodeError:
+            await message.answer("Не удалось декодировать данные веб-приложения")
+    else:
+        await message.answer("Данные веб-приложения не получены")
+    
 
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
