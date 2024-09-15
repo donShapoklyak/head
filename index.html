@@ -292,9 +292,9 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp
-        let niga = 5
+        
         document.getElementById('pays').addEventListener('click', function () { 
-                tg.sendData(JSON.stringify({ 'niga': niga }));
+                tg.sendData(JSON.stringify(totalPrice));
 
                 tg.close();
             });

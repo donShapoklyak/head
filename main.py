@@ -1,73 +1,26 @@
-import asyncio
-import logging
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters.command import Command
-from aiogram.types.web_app_info import WebAppInfo
-from aiogram.utils.keyboard import ReplyKeyboardBuilder, ReplyKeyboardMarkup, InlineKeyboardBuilder
-from aiogram import F
+import telebot
+from telebot import types
 import requests
-import json
-global obj
-global city
 
-logging.basicConfig(level=logging.INFO)
+# Replace 'your_api_key' with your actual API key
+bot = telebot.TeleBot('7366753393:AAGmK2pf8x8Hw-xOdYevf59V_q9zE2sPaFs')
 
-bot = Bot(token="7366753393:AAGmK2pf8x8Hw-xOdYevf59V_q9zE2sPaFs")
-
-dp = Dispatcher()
-
-
-@dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    user = message.from_user
-    username = user.first_name
-    markup = ReplyKeyboardBuilder()
-    markup.add(types.KeyboardButton(text="да!", width=1))
-    markup = markup.as_markup() 
-    await message.answer(text=f"привет! {username} хотите оформить заказ?", reply_markup=markup)
- 
-@dp.message(lambda message: message.text and 'да!' in message.text.lower())
-async def cmd_random(message: types.Message):
-    webAppInfo = types.WebAppInfo(url="https://donshapoklyak.github.io/head/")
-    builder = ReplyKeyboardBuilder()
-    builder.add(types.KeyboardButton(text='собрать пк', web_app=webAppInfo))
-    
-    await message.answer(text="отлично предлагаю воспользоваться нашим конструктором для сборки пк", reply_markup=builder.as_markup())
-def get_data_from_web_app():
-    response = requests.get('https://example.com/api/endpoint')
-    data = response.json()
-    return data
-@dp.message()
-async def web_app2(message: types.Message):
-    if message.web_app_data:
-        try:
-            data = json.loads(str(message.web_app_data))
-            print(f"Получено от пользователя: {data['niga']}")
-
-            # Отправляем сообщение боту с данными
-            await bot.send_message(chat_id=message.chat.id, text=f"Получено от пользователя: {data['niga']}")
-
-            # Отправляем ответ пользователю
-            await message.answer(f"Ваш ответ: {data['niga']}")
-        except json.JSONDecodeError:
-            await message.answer("Не удалось декодировать данные веб-приложения")
-    elif message.text.startswith("Получено от пользователя:"):
-        # Обрабатываем сообщения, отправляемые ботом
-        print(f"Получено от бота: {message.text.split(': ')[1]}")
-    else:
-        await message.answer("Данные веб-приложения не получены")
+@bot.message_handler(commands=['start'])
+def start(message):
+    keyboard = types.ReplyKeyboardMarkup(row_width=1)
+    webAppTest = types.WebAppInfo("https://donshapoklyak.github.io/head/")
+    one_butt = types.KeyboardButton(text="Тестовая страница", web_app=webAppTest)
+    keyboard.add(one_butt)
+    bot.send_message(message.chat.id, "Hello!", reply_markup=keyboard)
     
 
-async def main():
-    await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
 
-if __name__ == "__main__":
-    asyncio.run(main()) 
+@bot.message_handler(content_types=['web_app_data'])
+def handle_web_app_data(message):
+    data = message.web_app_data
+    bot.send_message(message.chat.id, data)
 
-
-
-
+bot.polling()    
 
 """""
         webAppInfo = types.WebAppInfo(url="https://donshapoklyak.github.io/head/")
